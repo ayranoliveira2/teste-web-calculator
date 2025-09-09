@@ -52,8 +52,8 @@ const TablePeriodos = ({ periodos }: PeriodoRow) => {
               </TableCell>
             </TableRow>
           ) : (
-            periodos.map((row, index) => (
-              <TableRow key={index}>
+            periodos.map((row) => (
+              <TableRow key={row.id}>
                 <TableCell sx={{ borderBottom: "none" }}>
                   <Typography>
                     {format(new Date(row.dataInicial), "dd/MM/yyyy HH:mm")}

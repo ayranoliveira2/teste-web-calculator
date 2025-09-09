@@ -31,7 +31,7 @@ Clone o repositório e instale dependências:
 
 ```bash
 git clone https://github.com/seu-usuario/frontend-calculadora-periodos.git
-cd frontend-calculadora-periodos
+cd teste-web-calculator
 pnpm install
 ```
 

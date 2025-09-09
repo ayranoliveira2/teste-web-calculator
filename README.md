@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🖥️ Frontend - Calculadora de Períodos de Tempo
 
-## Getting Started
+Aplicação frontend desenvolvida em **Next.js** com **TypeScript**, consumindo a API de cálculo de períodos de tempo. Utiliza **React Query** para gerenciamento de estado de dados, **Tailwind CSS** para estilização e **Material UI (MUI)** para componentes prontos.
 
-First, run the development server:
+---
+
+## 🚀 Tecnologias
+
+- [Next.js](https://nextjs.org/) - Framework React para SSR/SSG
+- [TypeScript](https://www.typescriptlang.org/)
+- [React Query](https://tanstack.com/query/latest) - Gerenciamento de estado e cache
+- [Tailwind CSS](https://tailwindcss.com/) - Utilitário de CSS
+- [Material UI](https://mui.com/) - Biblioteca de componentes React
+- [PNPM](https://pnpm.io/) - Gerenciador de pacotes
+
+---
+
+## 📦 Pré-requisitos
+
+Antes de rodar o projeto:
+
+- [Node.js](https://nodejs.org/) (>= 18.x)
+- [PNPM](https://pnpm.io/), ou npm/yarn
+- API backend rodando (NestJS)
+
+---
+
+## ⚙️ Instalação
+
+Clone o repositório e instale dependências:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/seu-usuario/frontend-calculadora-periodos.git
+cd frontend-calculadora-periodos
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Configuração do ambiente
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copie o arquivo de exemplo `.env.example` para `.env`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cp .env.example .env
+```
 
-## Learn More
+Edite o arquivo `.env` e configure as variáveis, por exemplo:
 
-To learn more about Next.js, take a look at the following resources:
+```
+NEXT_PUBLIC_API_URL=http://api.example.com/api
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ▶️ Rodando a aplicação
 
-## Deploy on Vercel
+### Ambiente de desenvolvimento
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Acesse: `http://localhost:3000`
+
+### Build e produção
+
+```bash
+pnpm build
+pnpm start
+```
+
+---
+
+## 🌐 Consumindo a API
+
+- `GET /periodos` → Listar períodos
+- `POST /periodos` → Criar período
+- `DELETE /periodos/:id` → Remover período
+
+Exemplo usando React Query:
+
+```ts
+const { data, isLoading } = useQuery(["periodos"], fetchPeriodos);
+```
+
+---
+
+## 🎨 Estilização
+
+- Tailwind CSS para layout e responsividade
+- Material UI para componentes prontos como `Button`, `Card`, `TextField`

@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
+import ClientThemeProvider from "../providers/client-provider";
+import QueryProvider from "@/providers/query-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import { Toaster } from "react-hot-toast";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = { subsets: ["latin"] };
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,10 +20,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={` ${inter.subsets} antialiased`}>
+        <QueryProvider>
+          <ClientThemeProvider>
+            {children}
+            <Toaster
+              position="bottom-center"
+              toastOptions={{
+                duration: 3000,
+              }}
+            />
+          </ClientThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );

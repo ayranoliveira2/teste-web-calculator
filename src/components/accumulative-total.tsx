@@ -1,4 +1,4 @@
-import { formatPeriodo } from "@/utils/format-periodo";
+import { formatTime } from "@/utils/format-time";
 import { Box, Typography } from "@mui/material";
 
 interface AccumulativeTotalProps {
@@ -25,7 +25,7 @@ const AccumulativeTotal = ({ total }: AccumulativeTotalProps) => {
         Totalizador acumulado
       </Typography>
       <Typography sx={{ color: "text.secondary", fontSize: "22px" }}>
-        {formatPeriodo(total, "total")}
+        {formatTime(total, "total")}
       </Typography>
     </Box>
   );

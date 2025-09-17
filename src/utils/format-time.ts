@@ -1,6 +1,6 @@
 import { intervalToDuration } from "date-fns";
 
-export const formatPeriodo = (value: number, type: "periodo" | "total") => {
+export const formatTime = (value: number, type: "periodo" | "total") => {
   const duration = intervalToDuration({ start: 0, end: value * 1000 });
 
   const totalHours = (duration.days ?? 0) * 24 + (duration.hours ?? 0);

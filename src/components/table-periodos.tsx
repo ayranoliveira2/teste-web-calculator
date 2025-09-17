@@ -1,5 +1,5 @@
 import { Periodo } from "@/types/periodo";
-import { formatPeriodo } from "@/utils/format-periodo";
+import { formatTime } from "@/utils/format-time";
 import {
   Typography,
   Table,
@@ -88,7 +88,7 @@ const TablePeriodos = ({ periodos }: PeriodoRow) => {
                 </TableCell>
                 <TableCell sx={{ borderBottom: "none" }}>
                   <Typography sx={{ fontSize: "0.9rem" }}>
-                    {formatPeriodo(row.duracaoSegundos, "periodo")}
+                    {formatTime(row.duracaoSegundos, "periodo")}
                   </Typography>
                 </TableCell>
               </TableRow>

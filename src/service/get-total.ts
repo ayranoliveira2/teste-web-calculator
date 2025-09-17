@@ -15,10 +15,12 @@ export function useGetTotal() {
       });
 
       if (!response.ok) {
-        throw new Error("Erro ao buscar total");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Erro ao buscar total");
       }
 
       return response.json();
     },
+    retry: 1,
   });
 }

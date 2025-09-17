@@ -19,15 +19,13 @@ export function useDeletePeriodos() {
       );
 
       if (!response.ok) {
-        toast.error("Erro ao deletar período", {
-          style: {
-            background: "#FF4C4C",
-            color: "#FFFFFF",
-          },
-        });
+        const responseData = await response.json();
+        const message = responseData?.message || "Erro ao deletar períodos";
 
-        throw new Error("Erro ao deletar período");
+        throw new Error(message);
       }
+
+      localStorage.removeItem("periodos");
 
       toast.success("Períodos deletados com sucesso", {
         style: {
@@ -36,8 +34,21 @@ export function useDeletePeriodos() {
         },
       });
       queryClient.invalidateQueries({ queryKey: ["total"] });
+    },
 
-      return response.json();
+    onError: (error) => {
+      const errors =
+        error.message === "Failed to fetch" ? "Erro de conexão" : error.message;
+
+      toast.error(errors, {
+        style: {
+          background: "#FF4C4C",
+          color: "#FFFFFF",
+        },
+      });
+
+      if (errors === "Erro de conexão") {
+      }
     },
   });
 }

@@ -13,10 +13,11 @@ const CardImage = () => {
         borderBottomLeftRadius: { xs: 0, md: 8 },
         display: "flex",
         justifyContent: "center",
-        alignItems: "start",
+        alignItems: "center",
         flexDirection: "column",
-        maxWidth: "350px",
-        padding: 8,
+        width: { xs: "100%", md: "357px" },
+        padding: 1,
+        paddingTop: { xs: 4, md: 2 },
       }}
     >
       <Typography
@@ -24,10 +25,18 @@ const CardImage = () => {
           color: "white",
           fontSize: 34,
           fontWeight: "extraLight",
+          maxWidth: 240,
+          marginBottom: -2,
         }}
       >
-        Calculadora de{" "}
-        <span className="font-extrabold text-[#5DBFFD] italic">
+        Calculadora <br /> de{" "}
+        <span
+          style={{
+            fontWeight: 900,
+            color: "#5DBFFD",
+            fontStyle: "italic",
+          }}
+        >
           Tempo de Trabalho
         </span>
       </Typography>
@@ -35,8 +44,8 @@ const CardImage = () => {
       <Image
         src="/image.png"
         alt="Descrição da imagem"
-        width={280}
-        height={280}
+        width={296}
+        height={296}
       />
     </Box>
   );

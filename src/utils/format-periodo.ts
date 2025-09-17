@@ -1,21 +1,21 @@
-export const formatPeriodo = (value: number) => {
-  const horas = Math.floor(value / 3600);
-  const minutos = Math.floor((value % 3600) / 60);
-  const segundosRestantes = value % 60;
+import { intervalToDuration } from "date-fns";
 
-  return `${String(horas).padStart(2, "0")}h${String(minutos).padStart(
-    2,
-    "0"
-  )}m${String(segundosRestantes).padStart(2, "0")}s`;
-};
+export const formatPeriodo = (value: number, type: "periodo" | "total") => {
+  const duration = intervalToDuration({ start: 0, end: value * 1000 });
 
-export const formatTotal = (
-  horas: number,
-  minutos: number,
-  segundos: number
-) => {
-  return `${String(horas).padStart(2, "0")}h${String(minutos).padStart(
-    2,
-    "0"
-  )}m${String(segundos).padStart(2, "0")}s`;
+  const totalHours = (duration.days ?? 0) * 24 + (duration.hours ?? 0);
+  const minutes = duration.minutes ?? 0;
+  const seconds = duration.seconds ?? 0;
+
+  const hoursStr = String(totalHours).padStart(2, "0");
+  const minutesStr = String(minutes).padStart(2, "0");
+  const secondsStr = String(seconds).padStart(2, "0");
+
+  if (type === "periodo") {
+    return value > 0 ? `${hoursStr}h${minutesStr}m${secondsStr}s` : "00h00m00s";
+  }
+
+  return value > 0
+    ? `${hoursStr}h ${minutesStr}m ${secondsStr}s`
+    : "00h 00m 00s";
 };

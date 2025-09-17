@@ -7,7 +7,7 @@ const theme = createTheme({
       main: "#0053C5", // azul escuro
     },
     secondary: {
-      main: "#5aa7ff2a", // azul claro/ciano
+      main: "#EFF6FF", // azul claro/ciano
     },
     error: {
       main: "#FF4C4C", // vermelho (botão limpar)

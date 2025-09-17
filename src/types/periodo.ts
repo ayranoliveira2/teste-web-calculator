@@ -19,10 +19,5 @@ export interface Periodo {
 }
 
 export interface PeriodosResponse {
-  periodos: Periodo[];
-  total: {
-    horas: string;
-    minutos: string;
-    segundos: string;
-  };
+  total: number;
 }

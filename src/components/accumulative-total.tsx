@@ -1,12 +1,8 @@
-import { formatTotal } from "@/utils/format-periodo";
+import { formatPeriodo } from "@/utils/format-periodo";
 import { Box, Typography } from "@mui/material";
 
 interface AccumulativeTotalProps {
-  total: {
-    horas: string;
-    minutos: string;
-    segundos: string;
-  };
+  total: number;
 }
 
 const AccumulativeTotal = ({ total }: AccumulativeTotalProps) => {
@@ -28,12 +24,8 @@ const AccumulativeTotal = ({ total }: AccumulativeTotalProps) => {
       <Typography variant="h6" sx={{ color: "primary.main" }}>
         Totalizador acumulado
       </Typography>
-      <Typography variant="body1" sx={{ color: "text.secondary" }}>
-        {formatTotal(
-          Number(total.horas),
-          Number(total.minutos),
-          Number(total.segundos)
-        )}
+      <Typography sx={{ color: "text.secondary", fontSize: "22px" }}>
+        {formatPeriodo(total, "total")}
       </Typography>
     </Box>
   );

@@ -25,15 +25,13 @@ export function useDeletePeriodos() {
         throw new Error(message);
       }
 
-      localStorage.removeItem("periodos");
-
       toast.success("Períodos deletados com sucesso", {
         style: {
           background: "#4BB543",
           color: "#FFFFFF",
         },
       });
-      queryClient.invalidateQueries({ queryKey: ["total"] });
+      queryClient.invalidateQueries({ queryKey: ["totalAndPeriodos"] });
     },
 
     onError: (error) => {

@@ -30,33 +30,13 @@ export function useCreatePeriodo() {
         throw new Error(message);
       }
 
-      const durationSeconds =
-        (new Date(data.dataFinal).getTime() -
-          new Date(data.dataInicial).getTime()) /
-        1000;
-
-      const dataSaveLocalStorage = {
-        id: crypto.randomUUID(),
-        dataInicial: data.dataInicial,
-        dataFinal: data.dataFinal,
-        duracaoSegundos: durationSeconds,
-      };
-
-      const existingPeriodos = JSON.parse(
-        localStorage.getItem("periodos") || "[]"
-      );
-
-      existingPeriodos.push(dataSaveLocalStorage);
-
-      localStorage.setItem("periodos", JSON.stringify(existingPeriodos));
-
       toast.success("Período criado com sucesso", {
         style: {
           background: "#4BB543",
           color: "#FFFFFF",
         },
       });
-      queryClient.invalidateQueries({ queryKey: ["total"] });
+      queryClient.invalidateQueries({ queryKey: ["totalAndPeriodos"] });
 
       return response.json();
     },

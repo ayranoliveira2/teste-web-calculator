@@ -12,12 +12,15 @@ export const createPeriodoSchema = z.object({
 export type CreatePeriodoInput = z.infer<typeof createPeriodoSchema>;
 
 export interface Periodo {
-  id: string;
   dataInicial: Date;
   dataFinal: Date;
   duracaoSegundos: number;
 }
 
-export interface PeriodosResponse {
+export interface TotalResponse {
   total: number;
+}
+
+export interface PeriodosResponse {
+  periodos: Periodo[];
 }

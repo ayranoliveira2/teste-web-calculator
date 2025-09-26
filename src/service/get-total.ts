@@ -1,26 +1,38 @@
 "use client";
 
-import { PeriodosResponse } from "@/types/periodo";
+import { PeriodosResponse, TotalResponse } from "@/types/periodo";
 import { useQuery } from "@tanstack/react-query";
 
-export function useGetTotal() {
-  return useQuery<PeriodosResponse>({
-    queryKey: ["total"],
+export function useGetData() {
+  return useQuery<{ total: TotalResponse; periodos: PeriodosResponse }>({
+    queryKey: ["totalAndPeriodos"],
     queryFn: async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/total`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const [totalResponse, PeriodoResponse] = await Promise.all([
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/total`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }),
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Erro ao buscar total");
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/periodos`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }),
+      ]);
+
+      if (!totalResponse.ok || !PeriodoResponse.ok) {
+        const errorData = await totalResponse.json();
+        throw new Error(errorData.message || "Erro ao buscar dados");
       }
 
-      return response.json();
+      return {
+        total: await totalResponse.json(),
+        periodos: await PeriodoResponse.json(),
+      };
     },
-    retry: 1,
+    retry: 0,
   });
 }

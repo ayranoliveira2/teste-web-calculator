@@ -1,19 +1,11 @@
 import { useForm } from "react-hook-form";
-import {
-  CreatePeriodoInput,
-  createPeriodoSchema,
-  Periodo,
-} from "@/types/periodo";
+import { CreatePeriodoInput, createPeriodoSchema } from "@/types/periodo";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Box, Button, CircularProgress, Stack, TextField } from "@mui/material";
 import { useCreatePeriodo } from "@/service/create-periodo";
 
-interface FormDateProps {
-  setPeriodos: React.Dispatch<React.SetStateAction<Periodo[]>>;
-}
-
-const FormDate = ({ setPeriodos }: FormDateProps) => {
+const FormDate = () => {
   const {
     reset,
     register,
@@ -37,8 +29,6 @@ const FormDate = ({ setPeriodos }: FormDateProps) => {
       },
       {
         onSuccess: () => {
-          const storedPeriodos = localStorage.getItem("periodos") || "[]";
-          setPeriodos(JSON.parse(storedPeriodos));
           reset();
         },
       }

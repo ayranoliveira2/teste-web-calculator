@@ -6,22 +6,14 @@ import TablePeriodos from "@/components/table-periodos";
 import AccumulativeTotal from "@/components/accumulative-total";
 import FormDate from "@/components/form-date";
 import CardImage from "@/components/card-image";
-import { useGetTotal } from "@/service/get-total";
+import { useGetData } from "@/service/get-total";
 import { useDeletePeriodos } from "@/service/delete-periodos";
 import { Button, CircularProgress } from "@mui/material";
-import { Periodo } from "@/types/periodo";
-import { useLayoutEffect, useState } from "react";
 import ErrorMessage from "@/components/error-message";
 
 export default function Home() {
-  const [periodos, setPeriodos] = useState<Periodo[]>([]);
-  const { data, isLoading, error } = useGetTotal();
+  const { data, isLoading, error } = useGetData();
   const { mutate, isPending } = useDeletePeriodos();
-
-  useLayoutEffect(() => {
-    const storedPeriodos = localStorage.getItem("periodos") || "[]";
-    setPeriodos(JSON.parse(storedPeriodos));
-  }, []);
 
   return (
     <Box
@@ -90,19 +82,21 @@ export default function Home() {
                 width: { xs: "100%", md: "642px" },
               }}
             >
-              <FormDate setPeriodos={setPeriodos} />
+              <FormDate />
 
-              <TablePeriodos periodos={periodos} />
+              <TablePeriodos periodos={data?.periodos.periodos!} />
 
-              <AccumulativeTotal total={data?.total!} />
+              <AccumulativeTotal total={data?.total.total!} />
 
               <Button
                 onClick={() => {
-                  mutate(undefined, {
-                    onSuccess: () => setPeriodos([]),
-                  });
+                  mutate();
                 }}
-                disabled={isPending || periodos.length === 0}
+                disabled={
+                  isPending ||
+                  (data?.periodos.periodos.length === 0 &&
+                    data?.total.total === 0)
+                }
                 type="button"
                 sx={{
                   backgroundColor: "#FF4C4C",
